@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-render('dashboard_view', [
+render('../views/dashboard_view', [
     'name' => $_SESSION['name'],
     'role' => $_SESSION['role']
 ]);
