@@ -12,20 +12,25 @@ $role = $_SESSION['role'];
 
 if ($role === 'teacher') {
 
-    // TEACHER: See submissions only for assignments they created
-    $sql = "SELECT s.submission_id, u.name AS student_name, c.course_name, 
-                   a.title, s.file_path, s.submitted_at
-            FROM submissions s
-            JOIN users u ON s.student_id = u.user_id
-            JOIN assignments a ON s.assignment_id = a.assignment_id
-            JOIN courses c ON a.course_id = c.course_id
-            WHERE a.teacher_id = ?
-            ORDER BY s.submitted_at DESC";
+    if ($role === 'teacher') {
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // TEACHER: See submissions only for assignments they teach
+   $sql = "SELECT s.submission_id, u.name AS student_name, c.course_name, 
+               a.title, s.file_path, s.submitted_at
+        FROM submissions s
+        JOIN users u ON s.student_id = u.user_id
+        JOIN assignments a ON s.assignment_id = a.assignment_id
+        JOIN courses c ON a.course_id = c.course_id
+        JOIN teachers t ON c.teacher_id = t.teacher_id
+        WHERE t.user_id = ?
+        ORDER BY s.submitted_at DESC";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+}
 
 } else if ($role === 'student') {
 

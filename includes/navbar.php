@@ -15,7 +15,7 @@ require_once __DIR__ . '/bootstrap.php';
             <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/assignments/create_assignment.php">Create Assignment</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/assignments/view_submissions.php">View Submissions</a></li>
           <?php elseif ($role === 'admin'): ?>
-            <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/admin/dashboard.php">Admin Panel</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/dashboard.php">Admin Panel</a></li>
           <?php endif; ?>
           <li class="nav-item"><a class="nav-link text-danger" href="<?= BASE_URL ?>/auth/logout.php">Logout</a></li>
         <?php else: ?>

@@ -3,10 +3,11 @@ session_start();
 include('../config.php');
 include('../includes/header.php');
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'student') {
+if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['student', 'teacher', 'admin'])) {
     header("Location: ../auth/login.php");
     exit();
 }
+
 
 $student_id = $_SESSION['user_id'];
 $sql = "SELECT c.course_id, c.course_name, c.description

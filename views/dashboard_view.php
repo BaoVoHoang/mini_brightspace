@@ -96,7 +96,6 @@ $role = $_SESSION['role'] ?? 'student';
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                     </svg>
                     <span>Reports</span>
-                </a>
             <?php endif; ?>
 
         </nav>
@@ -141,7 +140,7 @@ $role = $_SESSION['role'] ?? 'student';
                 <section class="w-full pt-8 pb-8 px-6">
                     <h3 class="text-lg font-semibold text-slate-900 mb-4 px-2">Quick Access</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full px-2">
-
+                         <?php if ($role === 'student'): ?>
                         <!-- View All Courses -->
                         <a href="courses/view_courses.php" class="card">
                             <div class="flex items-start justify-between mb-3">
@@ -180,7 +179,7 @@ $role = $_SESSION['role'] ?? 'student';
                             <h4 class="font-semibold text-slate-900">Submissions</h4>
                             <p class="text-sm text-slate-600 mt-1">Check your uploads</p>
                         </a>
-
+                        <?php endif; ?>
                         <!-- Teacher Only -->
                         <?php if ($role === 'teacher'): ?>
                             <a href="assignments/create_assignment.php" class="card">
@@ -194,6 +193,45 @@ $role = $_SESSION['role'] ?? 'student';
                                 <h4 class="font-semibold text-slate-900">Create Assignment</h4>
                                 <p class="text-sm text-slate-600 mt-1">Make tasks for students</p>
                             </a>
+                             <!-- View All Courses -->
+                        <a href="courses/view_courses.php" class="card">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="p-2 bg-blue-100 rounded-lg">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C6.228 6.228 2 10.432 2 15.5S6.228 24.772 12 24.772s10-4.228 10-9.272S17.772 6.228 12 6.253z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h4 class="font-semibold text-slate-900">View Courses</h4>
+                            <p class="text-sm text-slate-600 mt-1">Browse available courses</p>
+                        </a>
+
+                        <!-- My Assignments -->
+                        <a href="assignments/view_assignments.php" class="card">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="p-2 bg-purple-100 rounded-lg">
+                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h4 class="font-semibold text-slate-900">Assignments</h4>
+                            <p class="text-sm text-slate-600 mt-1">View your tasks</p>
+                        </a>
+
+                        <!-- My Submissions -->
+                        <a href="assignments/view_submissions.php" class="card">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="p-2 bg-green-100 rounded-lg">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h4 class="font-semibold text-slate-900">Submissions</h4>
+                            <p class="text-sm text-slate-600 mt-1">Check your uploads</p>
+                        </a>
+
                         <?php endif; ?>
 
                         <!-- Admin Only -->
@@ -209,18 +247,7 @@ $role = $_SESSION['role'] ?? 'student';
                                 <h4 class="font-semibold text-slate-900">Manage Users</h4>
                                 <p class="text-sm text-slate-600 mt-1">Control system users</p>
                             </a>
-                        <?php endif; ?>
-
-                    </div>
-                </section>
-
-                <!-- ADDITIONAL ACTIONS FOR ADMIN -->
-                <?php if ($role === 'admin'): ?>
-                    <section class="w-full pb-8 px-6">
-                        <h3 class="text-lg font-semibold text-slate-900 mb-4 px-2">Administration</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full px-2">
-
-                            <a href="admin/manage_courses.php" class="card">
+                             <a href="admin/manage_courses.php" class="card">
                                 <div class="flex items-start justify-between mb-3">
                                     <div class="p-2 bg-cyan-100 rounded-lg">
                                         <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -243,10 +270,13 @@ $role = $_SESSION['role'] ?? 'student';
                                 <h4 class="font-semibold text-slate-900">Reports</h4>
                                 <p class="text-sm text-slate-600 mt-1">View system analytics</p>
                             </a>
+                        <?php endif; ?>
 
-                        </div>
-                    </section>
-                <?php endif; ?>
+                    </div>
+                </section>
+
+
+              
 
             </div>
         </div>
